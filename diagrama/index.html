@@ -1,0 +1,183 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <body>
+  <script src="https://unpkg.com/gojs@2.2.12/release/go.js"></script>
+  <div id="allSampleContent" class="p-4 w-full">
+  <script src="https://unpkg.com/gojs@2.2.12/extensions/HyperlinkText.js"></script>
+    <script id="code">
+    function init() {
+
+      const $ = go.GraphObject.make;
+
+      myDiagram =
+        $(go.Diagram, "myDiagramDiv",
+          { isReadOnly: false, allowSelect: true, contentAlignment: go.Spot.Center });
+
+      myDiagram.nodeTemplate =
+        $(go.Node, "Auto",
+          { locationSpot: go.Spot.Center },
+          new go.Binding("location", "loc", go.Point.parse),
+          $(go.Shape, "Ellipse",
+            { fill: "transparent" },
+            new go.Binding("stroke", "color"),
+            new go.Binding("strokeWidth", "width"),
+            new go.Binding("strokeDashArray", "dash")),
+          $(go.TextBlock,
+          { margin: 1, maxSize: new go.Size(80, 80), textAlign: "center" },
+            new go.Binding("text", "text"))               
+        );
+
+      myDiagram.nodeTemplateMap.add("center",
+        $(go.Node, "Spot",
+          { locationSpot: go.Spot.Center },
+          new go.Binding("location", "loc", go.Point.parse),
+          $(go.Shape, "Circle",
+            {
+              fill: "rgba(128,128,128,0.1)", stroke: null,
+              width: 550, height: 550
+            }),
+          $(go.Shape, "Circle",
+            {
+              fill: "rgba(128,128,128,0.05)", stroke: null,
+              width: 400, height: 400
+            }),
+          $(go.Shape, "Circle",
+            {
+              fill: "rgba(128,128,128,0.033)", stroke: null,
+              width: 250, height: 250
+            }),
+          $(go.Panel, "Spot",
+            $(go.Shape, "Circle",
+              { isPanelMain: true, fill: "transparent", portId: "" },
+              new go.Binding("stroke", "hicolor"),
+              new go.Binding("strokeWidth", "hiwidth")),
+            $(go.Shape, "Circle",
+              //{ isPanelMain: true, fill: "transparent" },
+              { isPanelMain: true, stroke: "transparent"},
+              //new go.Binding("stroke", "color"),
+              new go.Binding("fill", "color"),
+              new go.Binding("strokeWidth", "width"),
+              new go.Binding("strokeDashArray", "dash")),
+            $(go.TextBlock,
+              { margin: 1, maxSize: new go.Size(110, 110), textAlign: "center"},
+              new go.Binding("text", "text"))              
+          )
+        ));
+
+      myDiagram.linkTemplate =
+        $(go.Link,
+          $(go.Shape,
+            new go.Binding("stroke", "color"),
+            new go.Binding("strokeWidth", "width"),
+            new go.Binding("strokeDashArray", "dash"))
+        );
+
+      var nodeDataArray = [
+        { key: 1, text: "Características Comportamentais Empreendedoras", loc: "450 500", category: "center", color: "LightBlue", hiwidth: 3 },
+        { key: 2, text: "BNCC", loc: "100 200", category: "center", color: "Violet", hiwidth: 3 },
+        { key: 3, text: "EntreComp", loc: "800 200", category: "center", color: "LightGreen", hiwidth: 3 },
+
+        { key: 10, text: "Busca de Oportunidade e Iniciativa", loc: "-30 415" }, 
+        { key: 11, text: "Comprometimento", loc: "90 415" },
+        { key: 12, text: "Exigência de Qualidade e Eficiência", loc: "210 415" },
+        { key: 13, text: "Correr Riscos Calculados", loc: "330 415" },
+        { key: 14, text: "Estabelecimento de Metas", loc: "450 415" },
+        { key: 15, text: "Busca de Informações", loc: "570 415" },
+        { key: 16, text: "Planejamento e Monitoramento Sistemáticos", loc: "690 415" },
+        { key: 17, text: "Persuasão e Rede de Contatos", loc: "810 415" },
+        { key: 18, text: "Independência e Autoconfiança", loc: "930 415" },
+        { key: 19, text: "Persistência", loc: "1050 415" },         
+
+        { key: 20, text: "criatividade", loc: "250 150" },
+        { key: 21, text: "inovação", loc: "250 150" },
+        { key: 22, text: "organização", loc: "250 150" },
+        { key: 23, text: "planejamento", loc: "250 150" },
+        { key: 24, text: "responsabilidade", loc: "250 150" },
+        { key: 25, text: "liderança", loc: "250 150" },
+        { key: 26, text: "colaboração", loc: "250 150" },
+        { key: 27, text: "visão de futuro", loc: "250 150" },
+        { key: 28, text: "assunção de riscos", loc: "250 150" },
+        { key: 29, text: "resiliência", loc: "250 150" },
+        { key: 210, text: "curiosidade científica", loc: "250 150" },
+
+        { key: 30, text: "Ideias e oportunidades", loc: "570 150" },
+        { key: 31, text: "Recursos", loc: "570 150" },
+        { key: 32, text: "Em ação", loc: "570 150" },
+
+        { key: 301, text: "Identificando oportunidades", loc: "570 150" },
+        { key: 302, text: "Criatividade", loc: "570 150" },
+        { key: 303, text: "Visão", loc: "570 150" },
+        { key: 304, text: "Valorizando ideias", loc: "570 150" },
+        { key: 305, text: "Pensamento ético e sustentável", loc: "570 150" },
+
+        { key: 311, text: "Autoconhecimento e autoeficácia", loc: "570 150" },
+        { key: 312, text: "Motivação e perseverança", loc: "570 150" },
+        { key: 313, text: "Mobilização de recursos", loc: "570 150" },
+        { key: 314, text: "Alfabetização financeira e econômica", loc: "570 150" },
+        { key: 315, text: "Mobilizando outros", loc: "570 150" },
+
+        { key: 321, text: "Tomando a iniciativa", loc: "570 150" },
+        { key: 322, text: "Planejando e gerenciando", loc: "570 150" },
+        { key: 323, text: "Lidando com a incerteza, a ambiguidade e o risco", loc: "570 150" },
+        { key: 324, text: "Trabalhando com outros", loc: "570 150" },
+        { key: 325, text: "Aprendendo com a experiência", loc: "570 150" },
+
+      ];
+      var linkDataArray = [
+        { from: 1, to: 10, color: "black", width: 2},
+        { from: 1, to: 11, color: "black", width: 2},
+        { from: 1, to: 12, color: "black", width: 2},
+        { from: 1, to: 13, color: "black", width: 2},
+        { from: 1, to: 14, color: "black", width: 2},
+        { from: 1, to: 15, color: "black", width: 2},
+        { from: 1, to: 16, color: "black", width: 2},
+        { from: 1, to: 17, color: "black", width: 2},                                                        
+        { from: 1, to: 18, color: "black", width: 2},
+        { from: 1, to: 19, color: "black", width: 2},
+
+        { from: 2, to: 20, color: "black", width: 2},
+        { from: 2, to: 21, color: "black", width: 2},
+        { from: 2, to: 22, color: "black", width: 2},
+        { from: 2, to: 23, color: "black", width: 2},
+        { from: 2, to: 24, color: "black", width: 2},
+        { from: 2, to: 25, color: "black", width: 2},
+        { from: 2, to: 26, color: "black", width: 2},
+        { from: 2, to: 27, color: "black", width: 2},                                                        
+        { from: 2, to: 28, color: "black", width: 2},
+        { from: 2, to: 29, color: "black", width: 2},        
+        { from: 2, to: 210, color: "black", width: 2},
+        
+        { from: 3, to: 30, color: "black", width: 2},
+        { from: 3, to: 31, color: "black", width: 2},
+        { from: 3, to: 32, color: "black", width: 2},
+        
+        { from: 30, to: 301, color: "black", width: 2},
+        { from: 30, to: 302, color: "black", width: 2},
+        { from: 30, to: 303, color: "black", width: 2},
+        { from: 30, to: 304, color: "black", width: 2},
+        { from: 30, to: 305, color: "black", width: 2},
+
+        { from: 31, to: 311, color: "black", width: 2},
+        { from: 31, to: 312, color: "black", width: 2},
+        { from: 31, to: 313, color: "black", width: 2},
+        { from: 31, to: 314, color: "black", width: 2},
+        { from: 31, to: 315, color: "black", width: 2},
+
+        { from: 32, to: 321, color: "black", width: 2},
+        { from: 32, to: 322, color: "black", width: 2}, 
+        { from: 32, to: 323, color: "black", width: 2}, 
+        { from: 32, to: 324, color: "black", width: 2}, 
+        { from: 32, to: 325, color: "black", width: 2}, 
+
+      ];
+      myDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+    }
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+
+  <div id="sample">
+    <div id="myDiagramDiv" style="border: 1px solid black; width: 100%; height: 900px; position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0); cursor: auto;"><canvas tabindex="0" width="1054" height="598" style="position: absolute; top: 0px; left: 0px; z-index: 2; user-select: none; touch-action: none; width: 1054px; height: 598px; cursor: auto;">This text is displayed if your browser does not support the Canvas HTML element.</canvas><div style="position: absolute; overflow: auto; width: 1054px; height: 598px; z-index: 1;"><div style="position: absolute; width: 1px; height: 1px;"></div>
+  </div>
+  </body>
+  </html>
