@@ -1,0 +1,66 @@
+:root {
+    --dark: #131314;
+    --light: #FFF;
+    --dark-sec: #1e1e1e;
+    --light-sec: #f1f3f4;
+}
+
+body {
+    font-family: 'Roboto';
+    background: var(--dark);
+    color: var(--light-sec);
+    margin: 0;
+    width: -webkit-fill-available;
+    transition: background 0.2s ease;
+}
+
+::selection {
+    background: var(--light);
+    color: var(--dark);
+}
+
+footer {
+    margin: 100% 0 0 0;
+    display: flex;
+    align-items: flex-start;
+    margin: 50px 0 0;
+    padding: 15px;
+    p {
+        margin: 0 0 0 auto;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--light);
+}
+
+#info {
+    background: var(--dark-sec);
+    margin: 0;
+    padding: 15px;
+    font-size: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    h1 {
+        margin: 0;
+    }
+    span {
+        font-size: 16px;
+    }
+    img {
+        border-radius: 5rem;
+        margin-right: 10px;
+        -webkit-user-drag: none;
+        -moz-user-drag: none;
+        user-select: none;
+    }
+}
+
+img {
+    user-select: none;
+    -webkit-user-drag: none;
+}
