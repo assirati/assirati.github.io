@@ -35,7 +35,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <title>Immersive AR Session</title>
   </head>
   <body>
-    <header>
+    <!-- <header>
       <details open>
         <summary>Immersive AR Session</summary>
         <p>
@@ -47,7 +47,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
           <a class="back" href="./">Back</a>
         </p>
       </details>
-    </header>
+    </header> -->
     <script type="module">
       import { WebXRButton } from "./js/util/webxr-button.js";
       import { Scene } from "./js/render/scenes/scene.js";
@@ -183,7 +183,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         if (event.session.isImmersive) {
           xrButton.setSession(null);
           // Turn the background back on when we go back to the inlive view.
-          skybox.visible = true;
+          skybox.visible = false;
         }
       }
 
